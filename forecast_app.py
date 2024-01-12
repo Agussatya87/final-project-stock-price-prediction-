@@ -79,6 +79,6 @@ forecast['trend'] = forecast['trend']
 st.subheader(f'Forecast data for the next {n_months} months')
 st.write(forecast[['date', 'open', 'high', 'low', 'close', 'adj_close', 'trend']].tail(n_months * period))
 
-st.write(f'Forecast plot for {n_months} years')
+st.write(f'Forecast plot for {n_months} months')
 fig1 = plot_plotly(model, forecast)
 st.plotly_chart(fig1)
