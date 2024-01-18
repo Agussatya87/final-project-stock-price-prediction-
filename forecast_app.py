@@ -29,8 +29,7 @@ def load_data(ticker):
 data = load_data(stock)
 
 # Load saved model
-model_file_path = "prophet_model.pkl" 
-with open(model_file_path, "rb") as model_file:
+with open("prophet_model.pkl", "rb") as model_file:
     model = pickle.load(model_file)
 
 # Load forecast data
