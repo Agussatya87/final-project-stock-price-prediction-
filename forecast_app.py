@@ -68,12 +68,12 @@ def plot_raw_data_ma(data):
 plot_raw_data_ma(data)
 
 forecast['date']  = forecast['ds']
-forecast['open'] = forecast['yhat']
-forecast['high'] = forecast['yhat_upper']
-forecast['low'] = forecast['yhat_lower']
+#forecast['open'] = forecast['yhat']
+#forecast['high'] = forecast['yhat_upper']
+#forecast['low'] = forecast['yhat_lower']
 forecast['close'] = forecast['yhat']
-forecast['adj_close'] = forecast['yhat']
-forecast['trend'] = forecast['trend']
+#forecast['adj_close'] = forecast['yhat']
+#forecast['trend'] = forecast['trend']
 
 # Display forecast data
 st.subheader(f'Forecast data for the next {n_months} months')
