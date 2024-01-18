@@ -31,7 +31,7 @@ data = load_data(stock)
 # Load saved model
 try:
     with open("prophet_model.pkl", "rb") as model_file:
-        model = pickle.load(model_file)
+        loaded_model = pickle.load(model_file)
 except Exception as e:
     print(f"Error loading the model: {e}")
 
@@ -85,5 +85,5 @@ st.subheader(f'Forecast data for the next {n_months} months')
 st.write(forecast[['date', 'close']].tail(n_months * period))
 
 st.write(f'Forecast plot for {n_months} months')
-fig1 = plot_plotly(model, forecast, xlabel='Date', ylabel='Stock Price', plot_forecast=True)
+fig1 = plot_plotly(loaded_model, forecast, xlabel='Date', ylabel='Stock Price', plot_forecast=True)
 st.plotly_chart(fig1)
