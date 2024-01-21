@@ -29,8 +29,12 @@ def load_data(ticker):
 data = load_data(stock)
 
 # Load saved model
-with open("prophet_model.pkl", "rb") as model_file:
-    loaded_model = pickle.load(model_file)
+try:
+    with open("prophet_model.pkl", "rb") as model_file:
+        loaded_model = pickle.load(model_file)
+except Exception as e:
+    st.error(f"Error loading the model: {e}")
+
 
 # Load forecast data
 forecast = pd.read_csv("forecast_data.csv")
