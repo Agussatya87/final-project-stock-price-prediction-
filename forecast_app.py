@@ -75,5 +75,5 @@ st.subheader(f'Forecast data for the next {n_months} months')
 st.write(forecast[['date', 'close']].tail(n_months * period))
 
 st.write(f'Forecast plot for {n_months} months')
-fig1 = plot_plotly(model, forecast, xlabel='Date', ylabel='Stock Price', plot_forecast=True)  # Corrected variable name to 'model'
+fig1 = plot_plotly(model, forecast, xlabel='Date', ylabel='Stock Price') 
 st.plotly_chart(fig1)
