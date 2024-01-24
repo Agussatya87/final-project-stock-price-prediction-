@@ -28,19 +28,7 @@ def load_data(ticker):
 
 data = load_data(stock)
 
-# Load saved model
-loaded_model = None  # Inisialisasi model dengan None
-model_file_path = "prophet_model.pkl"
-
-try:
-    with open(model_file_path, "rb") as model_file:
-        loaded_model = pickle.load(model_file)
-except Exception as e:
-    st.error(f"Error loading the model: {e}")
-
-# Cek apakah model berhasil dimuat sebelum digunakan
-if loaded_model is None:
-    st.error("Model tidak berhasil dimuat. Pastikan file model ada dan tidak ada kesalahan selama loading.")
+model = pd.compat.pickle_compat.load("prophet_model.pkl")
 
 
 # Load forecast data
@@ -93,5 +81,5 @@ st.subheader(f'Forecast data for the next {n_months} months')
 st.write(forecast[['date', 'close']].tail(n_months * period))
 
 st.write(f'Forecast plot for {n_months} months')
-fig1 = plot_plotly(loaded_model, forecast, xlabel='Date', ylabel='Stock Price', plot_forecast=True)
+fig1 = plot_plotly(model, forecast, xlabel='Date', ylabel='Stock Price', plot_forecast=True)
 st.plotly_chart(fig1)
