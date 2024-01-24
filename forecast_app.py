@@ -30,7 +30,7 @@ data = load_data(stock)
 
 # Load the model using pickle
 with open("prophet_model.pkl", "rb") as model_file:
-    model = pickle.load(model_file)
+    model = pd.read_pickle(model_file)
 
 # Load forecast data
 forecast = pd.read_csv("forecast_data.csv")
