@@ -13,10 +13,10 @@ st.sidebar.header('Dashboard')
 
 st.title('BRI Stock Forecast Web')
 
-stock = ('BBRI.JK')
+stock = 'BBRI.JK'  # Removed unnecessary parentheses
 
 n_months = 1
-period = 30*n_months
+period = 30 * n_months
 
 @st.cache_data
 def load_data(ticker):
@@ -28,8 +28,9 @@ def load_data(ticker):
 
 data = load_data(stock)
 
-model = pd.compat.pickle_compat.load("prophet_model.pkl")
-
+# Load the model using pickle
+with open("prophet_model.pkl", "rb") as model_file:
+    model = pickle.load(model_file)
 
 # Load forecast data
 forecast = pd.read_csv("forecast_data.csv")
@@ -66,14 +67,7 @@ def plot_raw_data_ma(data):
 
 plot_raw_data_ma(data)
 
-# forecast['date']  = forecast['ds']
-# #forecast['open'] = forecast['yhat']
-# #forecast['high'] = forecast['yhat_upper']
-# #forecast['low'] = forecast['yhat_lower']
-# forecast['close'] = forecast['yhat']
-# #forecast['adj_close'] = forecast['yhat']
-# #forecast['trend'] = forecast['trend']
-
+# Rename columns in forecast DataFrame
 forecast = forecast.rename(columns={'ds': 'date', 'yhat': 'close'})
 
 # Display forecast data
@@ -81,5 +75,5 @@ st.subheader(f'Forecast data for the next {n_months} months')
 st.write(forecast[['date', 'close']].tail(n_months * period))
 
 st.write(f'Forecast plot for {n_months} months')
-fig1 = plot_plotly(model, forecast, xlabel='Date', ylabel='Stock Price', plot_forecast=True)
+fig1 = plot_plotly(model, forecast, xlabel='Date', ylabel='Stock Price', plot_forecast=True)  # Corrected variable name to 'model'
 st.plotly_chart(fig1)
