@@ -29,11 +29,18 @@ def load_data(ticker):
 data = load_data(stock)
 
 # Load saved model
+loaded_model = None  # Inisialisasi model dengan None
+model_file_path = "prophet_model.pkl"
+
 try:
-    with open("prophet_model.pkl", "rb") as model_file:
+    with open(model_file_path, "rb") as model_file:
         loaded_model = pickle.load(model_file)
 except Exception as e:
     st.error(f"Error loading the model: {e}")
+
+# Cek apakah model berhasil dimuat sebelum digunakan
+if loaded_model is None:
+    st.error("Model tidak berhasil dimuat. Pastikan file model ada dan tidak ada kesalahan selama loading.")
 
 
 # Load forecast data
