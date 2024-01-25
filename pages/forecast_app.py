@@ -5,7 +5,6 @@ from prophet.plot import plot_plotly
 from plotly import graph_objs as go
 import yfinance as yf
 from datetime import date
-import pickle
 
 st.set_page_config(layout='wide', initial_sidebar_state='expanded')
 
