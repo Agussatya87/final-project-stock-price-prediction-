@@ -5,12 +5,13 @@ from prophet.plot import plot_plotly
 from plotly import graph_objs as go
 import yfinance as yf
 from datetime import date
+import numpy as np
 
 st.set_page_config(layout='wide', initial_sidebar_state='expanded')
 
 st.title('BRI Stock Forecast Web')
 
-stock = 'BBRI.JK'  # Removed unnecessary parentheses
+stock = 'BBRI.JK'
 
 n_months = 1
 period = 30 * n_months
@@ -25,11 +26,9 @@ def load_data(ticker):
 
 data = load_data(stock)
 
-# Display raw data
 st.subheader('Raw data')
 st.write(data.tail(30))
 
-# Plot raw data
 def plot_raw_data():
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=data['Date'], y=data['Close'], name="stock_close"))
@@ -69,10 +68,29 @@ forecast = model.predict(future)
 forecast['date']  = forecast['ds']
 forecast['close'] = forecast['yhat']
 
-# Display forecast data
 st.subheader(f'Forecast data for the next {n_months} months')
 st.write(forecast[['date', 'close']].tail(n_months * period))
+
+df_test = data.tail(n_months * period) 
+df_test = df_test.rename(columns={"Date": "ds", "Close": "y"}) 
+
+df_test = pd.merge(df_test, forecast[['ds', 'yhat']], how='left', left_on='ds', right_on='ds')
+df_test = df_test.rename(columns={"yhat": "yhat_forecast"})
+
+from sklearn.metrics import mean_absolute_error, mean_squared_error
+mae = mean_absolute_error(df_test['y'], df_test['yhat_forecast'])
+mse = mean_squared_error(df_test['y'], df_test['yhat_forecast'])
+rmse = np.sqrt(mse)
+
+df_test['mape'] = (abs(df_test['y'] - df_test['yhat_forecast']) / abs(df_test['y'])) * 100
+df_test['mspe'] = ((df_test['y'] - df_test['yhat_forecast'])**2 / df_test['y']**2) * 100
+df_test['rmspe'] = np.sqrt(df_test['mspe'])
 
 st.write(f'Forecast plot for {n_months} months')
 fig1 = plot_plotly(model, forecast) 
 st.plotly_chart(fig1)
+
+st.subheader('Percentage Errors:')
+st.write(f'Mean Absolute Percentage Error (MAPE): {df_test["mape"].mean():.2f}%')
+st.write(f'Mean Squared Percentage Error (MSPE): {df_test["mspe"].mean():.2f}%')
+st.write(f'Root Mean Squared Percentage Error (RMSPE): {df_test["rmspe"].mean():.2f}%')
