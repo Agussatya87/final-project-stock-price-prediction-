@@ -26,13 +26,6 @@ def load_data(ticker):
 
 data = load_data(stock)
 
-# Load the model using pickle
-with open("prophet_model.pkl", "rb") as model_file:
-    model = pd.read_pickle(model_file)
-
-# Load forecast data
-forecast = pd.read_csv("forecast_data.csv")
-
 # Display raw data
 st.subheader('Raw data')
 st.write(data.tail(30))
@@ -65,8 +58,17 @@ def plot_raw_data_ma(data):
 
 plot_raw_data_ma(data)
 
-# Rename columns in forecast DataFrame
-forecast = forecast.rename(columns={'ds': 'date', 'yhat': 'close'})
+df_train = data[['Date','Close']]
+df_train = df_train.rename(columns={"Date": "ds", "Close": "y"})
+
+model = Prophet()
+model.fit(df_train)
+
+future = model.make_future_dataframe(periods=period)
+forecast = model.predict(future)
+
+forecast['date']  = forecast['ds']
+forecast['close'] = forecast['yhat']
 
 # Display forecast data
 st.subheader(f'Forecast data for the next {n_months} months')
