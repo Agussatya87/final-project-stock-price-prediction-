@@ -9,7 +9,7 @@ import numpy as np
 
 st.set_page_config(layout='wide', initial_sidebar_state='expanded')
 
-st.title('BRI Stock Prices Predict')
+st.title('BRI Stock Forecast Web')
 
 stock = 'BBRI.JK'
 
