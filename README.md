@@ -30,12 +30,13 @@ After that, users can perform simple technical analysis with data, indicators an
 # System Requirements
 
 Library
-- numpy
+- numpy,
   NumPy as a library that provides support for array and matrix operations in Python.
-- Pandas
+- Pandas,
   Pandas library used for data analysis that provides data structures, such as DataFrame.
-- Matplotlib
-  Matplotlib is used to create graphical visualizations, such as plots.
+- Prophet,
+  Prophet is a procedure for forecasting time series data based on an additive model where non-linear trends are fit with yearly, weekly, and daily seasonality, 
+  plus holiday effects.
 - yfinance
   library used as a dataset to access BBRI stock data from Yahoo Finance.
 - Plotly
