@@ -57,7 +57,7 @@ def plot_raw_data_ma(data):
 plot_raw_data_ma(data)
 
 df_train = data[['Date','Close']]
-df_train = df_train.rename(columns={"Date": "ds", "Close": "prices"})
+df_train = df_train.rename(columns={"Date": "ds", "Close": "y"})
 
 model = Prophet()
 model.fit(df_train)
@@ -72,7 +72,7 @@ st.subheader(f'Forecast data for the next {n_months} months')
 st.write(forecast[['date', 'close']].tail(n_months * period))
 
 df_test = data.tail(n_months * period) 
-df_test = df_test.rename(columns={"Date": "ds", "Close": "prices"}) 
+df_test = df_test.rename(columns={"Date": "ds", "Close": "y"}) 
 
 df_test = pd.merge(df_test, forecast[['ds', 'yhat']], how='left', left_on='ds', right_on='ds')
 df_test = df_test.rename(columns={"yhat": "yhat_forecast"})
