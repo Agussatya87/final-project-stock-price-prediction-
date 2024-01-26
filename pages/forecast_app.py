@@ -77,20 +77,20 @@ df_test = df_test.rename(columns={"Date": "ds", "Close": "y"})
 df_test = pd.merge(df_test, forecast[['ds', 'yhat']], how='left', left_on='ds', right_on='ds')
 df_test = df_test.rename(columns={"yhat": "yhat_forecast"})
 
-from sklearn.metrics import mean_absolute_error, mean_squared_error
-mae = mean_absolute_error(df_test['y'], df_test['yhat_forecast'])
-mse = mean_squared_error(df_test['y'], df_test['yhat_forecast'])
-rmse = np.sqrt(mse)
+# from sklearn.metrics import mean_absolute_error, mean_squared_error
+# mae = mean_absolute_error(df_test['y'], df_test['yhat_forecast'])
+# mse = mean_squared_error(df_test['y'], df_test['yhat_forecast'])
+# rmse = np.sqrt(mse)
 
-df_test['mape'] = (abs(df_test['y'] - df_test['yhat_forecast']) / abs(df_test['y'])) * 100
-df_test['mspe'] = ((df_test['y'] - df_test['yhat_forecast'])**2 / df_test['y']**2) * 100
-df_test['rmspe'] = np.sqrt(df_test['mspe'])
+# df_test['mape'] = (abs(df_test['y'] - df_test['yhat_forecast']) / abs(df_test['y'])) * 100
+# df_test['mspe'] = ((df_test['y'] - df_test['yhat_forecast'])**2 / df_test['y']**2) * 100
+# df_test['rmspe'] = np.sqrt(df_test['mspe'])
 
 st.write(f'Forecast plot for {n_months} months')
 fig1 = plot_plotly(model, forecast) 
 st.plotly_chart(fig1)
 
-st.subheader('Percentage Errors:')
-st.write(f'Mean Absolute Percentage Error (MAPE): {df_test["mape"].mean():.2f}%')
-st.write(f'Mean Squared Percentage Error (MSPE): {df_test["mspe"].mean():.2f}%')
-st.write(f'Root Mean Squared Percentage Error (RMSPE): {df_test["rmspe"].mean():.2f}%')
+# st.subheader('Percentage Errors:')
+# st.write(f'Mean Absolute Percentage Error (MAPE): {df_test["mape"].mean():.2f}%')
+# st.write(f'Mean Squared Percentage Error (MSPE): {df_test["mspe"].mean():.2f}%')
+# st.write(f'Root Mean Squared Percentage Error (RMSPE): {df_test["rmspe"].mean():.2f}%')
