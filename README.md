@@ -20,6 +20,13 @@ This machine learning model can predict the closing price movement of a stock fo
 
 If we don't use ML to predict stock price movements, we can use simple technical analysis that can be used by novice traders, such as determining support and resistance and looking at technical indicators such as moving average and relative strength index (RSI) to give buy or sell signals. Or with fundamental analysis by looking at the company's financial statements.
 
+# How To Use
+
+How to use STOBI is only by entering the STOBI website after that the user can see raw data in the form of tables and line diagrams, on the STOBI web there is also an indicator tool called "Moving Average 100" and "Moving Average 200" which functions in technical analysis, this moving average calculates the average movement of data within a certain period and finally there are the results of predicting the closing price of BBRI shares in the form of a table displaying only two data, namely "date" and "Close" and a line diagram displaying the results of BBRI stock price predictions and a dot diagram displaying the actual closing stock price.
+
+After that, users can perform simple technical analysis with data, indicators and prediction results displayed by the STOBI web.
+![image](https://github.com/Agussatya87/final-project-stock-price-prediction-/assets/120473425/e51c42b7-890c-458d-8652-324841acc33f)
+
 
 # System Requirements
 
