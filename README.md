@@ -42,4 +42,10 @@ Library
 - Plotly
   yang digunakan sebagai dataset untuk mengakses data saham BBRI dari Yahoo Finance
 
+Hosting
+  - Streamlit
+
+programming language
+  - Python
+
 
