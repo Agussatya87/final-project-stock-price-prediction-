@@ -1,4 +1,4 @@
-# final-project-stock-price-prediction-
+# Stock Price Prediction
 
 We want to create a machine learning model to predict stock price trends, to find out the movement of stock price fluctuations.
 
